@@ -45,7 +45,7 @@
                     <div class="register-form mt-5 mt-md-0"><img src="img/logo.png" class="logo img-responsive mb-4 mb-md-6" alt="">
                         <h1 class="text-darker bold">Register</h1>
                         <p class="text-secondary mb-4 mb-md-6">Already have an account? <a href="login.html" class="text-primary bold">Login here</a></p>
-                        <form id="register_form" class="cozy" action="http://206.189.54.1/user/register" method="post">
+                        <form id="register_form" class="cozy" action="http://206.189.54.1/auth/register" method="post">
                             <div class="form-group has-icon">
                                 <input type="text" id="username" name="username" class="form-control form-control-rounded" placeholder="Desired username" minlength="4" required> <i class="icon fas fa-user-plus"></i>
                             </div>
@@ -140,7 +140,7 @@
             var responseData;
             console.log(formData);
             $.ajax({
-                url: "http://206.189.54.1/user/register",
+                url: "http://206.189.54.1/auth/register",
                 type: 'post',
                 contentType: 'application/json',
                 data: formData,
