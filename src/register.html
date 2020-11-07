@@ -45,18 +45,18 @@
                     <div class="register-form mt-5 mt-md-0"><img src="img/logo.png" class="logo img-responsive mb-4 mb-md-6" alt="">
                         <h1 class="text-darker bold">Register</h1>
                         <p class="text-secondary mb-4 mb-md-6">Already have an account? <a href="login.html" class="text-primary bold">Login here</a></p>
-                        <form id="register_form" class="cozy" action="http://206.189.54.1/user/register" method="post" novalidate>
+                        <form id="register_form" class="cozy" action="http://206.189.54.1/user/register" method="post">
                             <div class="form-group has-icon">
-                                <input type="text" name="username" class="form-control form-control-rounded" placeholder="Desired username"> <i class="icon fas fa-user-plus"></i>
+                                <input type="text" id="username" name="username" class="form-control form-control-rounded" placeholder="Desired username" minlength="4" required> <i class="icon fas fa-user-plus"></i>
                             </div>
                             <div class="form-group has-icon">
-                                <input type="text" name="email" class="form-control form-control-rounded" placeholder="Valid email"> <i class="icon fas fa-envelope"></i>
+                                <input type="email" id="email" name="email" class="form-control form-control-rounded" placeholder="Valid email" required> <i class="icon fas fa-envelope"></i>
                             </div>
                             <div class="form-group has-icon">
-                                <input type="password" name="password" class="form-control form-control-rounded" placeholder="Password"> <i class="icon fas fa-lock"></i>
+                                <input type="password" id="password" name="password" class="form-control form-control-rounded" placeholder="Password" minlength="6" required> <i class="icon fas fa-lock"></i>
                             </div>
                             <div class="form-group has-icon">
-                                <input type="password" name="cpassword" class="form-control form-control-rounded" placeholder="Confirm password"> <i class="icon fas fa-lock"></i>
+                                <input type="password" id="cpassword" name="cpassword" class="form-control form-control-rounded" placeholder="Confirm password" required> <i class="icon fas fa-lock"></i>
                             </div>
                             <div class="form-group d-flex align-items-center justify-content-between"><button id="register_btn" type="submit" class="btn btn-primary btn-rounded ml-auto">Register <i class="fas fa-long-arrow-alt-right ml-2"></i></button></div>
                         </form>
@@ -96,7 +96,6 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/cookieconsent.min.js"></script>
     <script src="js/common-script.js"></script>
-    <script src="js/forms.js"></script>
     <script src="js/stripe-bubbles.js"></script>
     <script src="js/stripe-menu.js"></script>
     <script src="js/cc.js"></script>
@@ -107,13 +106,35 @@
     <script src="js/03.demo.js"></script><!-- endinject -->
 
     <script>
-        $("#register_btn").on('click', function(e) {
+        function validateCPass() {
+            var password = $("#password");
+            var cpassword = $("#cpassword");
+
+            if(cpassword.val() != password.val()) {
+                console.log(cpassword.val())
+                cpassword.get(0).setCustomValidity('Passwords don\'t match');
+            } else {
+                cpassword.get(0).setCustomValidity('');
+            }
+        }
+
+        $("#cpassword").on('change', function() {
+            validateCPass();
+        })
+
+        $("#password").on('change', function() {
+            validateCPass();
+        })
+
+        $("#register_form").submit(function(e) {
             e.preventDefault();
             var form = $("#register_form");
 
             var username = form.find('input[name="username"]').val();
             var email = form.find('input[name="email"]').val();
             var password = form.find('input[name="password"]').val();
+            var cpassword = form.find('input[name="cpassword"]').val();
+
 
             var formData = JSON.stringify({username: username, email: email, password: password});
             var responseData;
@@ -121,22 +142,22 @@
             $.ajax({
                 url: "http://206.189.54.1/user/register",
                 type: 'post',
-                dataType: 'json',
                 contentType: 'application/json',
                 data: formData,
                 success: function(data) {
-                    console.log(data);
-                    responseData = data;
-                    if (responseData == 200){
-                        window.location = "login.html";
-                    }
-                    else {
-                        alert(" Register-ul a esuat! Te rugam sa incerci din nou! ");
-                       // alert("");
+                    window.location = "login.html";
+                },
+                error: function(jqXHR) {
+                    console.log(jqXHR);
+                    if (jqXHR.responseJSON) {
+                        jqXHR.responseJSON.details.forEach(detail => {
+                            alert(detail.message);
+                        })
+                    } else {
+                        alert(jqXHR.responseText);
                     }
                 }
             })
-            
         });
     </script>
 </body>
