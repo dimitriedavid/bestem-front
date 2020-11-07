@@ -108,10 +108,25 @@
 
     <script>
         $("#register_btn").on('click', function(e) {
-            var form = $("#register_form");
             e.preventDefault();
-            console.log($("#register_form").serialize());
-            form.submit();
+            var form = $("#register_form");
+
+            var username = form.find('input[name="username"]').val();
+            var email = form.find('input[name="email"]').val();
+            var password = form.find('input[name="password"]').val();
+
+            var formData = JSON.stringify({username: username, email: email, password: password});
+            console.log(formData);
+            $.ajax({
+                url: "http://206.189.54.1/user/register",
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: formData,
+                success: function(data) {
+                    console.log(data);
+                }
+            })
         });
     </script>
 </body>
