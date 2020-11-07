@@ -318,28 +318,11 @@
                 </div>
             </div>
         </section><!-- ./Footer - Stay in Touch -->
-        <footer class="site-footer section text-center block bg-contrast">
-            <div class="container py-4">
-                <h2 class="font-md regular">Stay updated</h2>
-            </div>
-            <p class="text-secondary mb-5">By registering with us you will receive right in your inbox all new features and updates</p>
-            <div class="row">
-                <div class="col-12 col-md-6 mx-auto overflow-hidden">
-                    <form action="srv/register.php" class="form" data-response-message-animation="slide-in-left">
-                        <div class="input-group"><input type="email" name="Subscribe[email]" class="form-control rounded-circle-left" placeholder="Enter your email" required>
-                            <div class="input-group-append"><button class="btn btn-rounded btn-primary" type="submit">Register</button></div>
-                        </div>
-                    </form>
-                    <div class="response-message"><i class="fas fa-envelope font-lg"></i>
-                        <p class="font-md m-0">Check your email</p>
-                        <p class="response">We sent you an email with a link to get started. You’ll be in your account in no time.</p>
-                    </div>
-                </div>
-            </div>
-            <hr class="mt-5">
-            <nav class="nav social-icons justify-content-center mt-4"><a href="#" class="mr-3 font-regular text-secondary"><i class="fab fa-facebook-f"></i></a> <a href="#" class="mr-3 font-regular text-secondary"><i class="fab fa-twitter"></i></a> <a href="#" class="mr-3 font-regular text-secondary"><i class="fab fa-instagram"></i></a> <a href="#" class="mr-3 font-regular text-secondary"><i class="fas fa-rss"></i></a> <a href="#" class="font-regular text-secondary"><i class="fab fa-linkedin-in"></i></a></nav>
-            <p class="small copyright text-secondary">© 2018 Dashcore, <em>by</em> <a class="brand bold" href="http://www.5studios.net">5Studios.net</a></p>
-        </footer>
+        
+        <div id="footer"></div>
+        <script src="js/jquery.js"></script>
+        <script>$("#footer").load("partials/footer.html")</script>
+
     </main><!-- themeforest:js -->
     <script src="js/01.cookie-consent-util.js"></script>
     <script src="js/02.1.cookie-consent-themes.js"></script>
