@@ -116,6 +116,7 @@
             var password = form.find('input[name="password"]').val();
 
             var formData = JSON.stringify({username: username, email: email, password: password});
+            var responseData;
             console.log(formData);
             $.ajax({
                 url: "http://206.189.54.1/user/register",
@@ -125,8 +126,17 @@
                 data: formData,
                 success: function(data) {
                     console.log(data);
+                    responseData = data;
+                    if (responseData == 200){
+                        window.location = "login.html";
+                    }
+                    else {
+                        alert(" Register-ul a esuat! Te rugam sa incerci din nou! ");
+                       // alert("");
+                    }
                 }
             })
+            
         });
     </script>
 </body>

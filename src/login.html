@@ -45,13 +45,13 @@
                     <div class="login-form mt-5 mt-md-0"><img src="img/logo.png" class="logo img-responsive mb-4 mb-md-6" alt="">
                         <h1 class="text-darker bold">Login</h1>
                         <p class="text-secondary mt-0 mb-4 mb-md-6">Don't have an account yet? <a href="register.html" class="text-primary bold">Create it here</a></p>
-                        <form class="cozy" action="srv/login.php" data-validate-on="submit" novalidate><label class="control-label bold small text-uppercase text-secondary">Username</label>
-                            <div class="form-group has-icon"><input type="text" id="login_username" name="Login[username]" class="form-control form-control-rounded" placeholder="Your registered username" required> <i class="icon fas fa-user"></i></div><label class="control-label bold small text-uppercase text-secondary">Password</label>
-                            <div class="form-group has-icon"><input type="password" id="login_password" name="Login[password]" class="form-control form-control-rounded" placeholder="Your password" required> <i class="icon fas fa-lock"></i></div>
+                        <form class="cozy" id="login_form"  novalidate><label class="control-label bold small text-uppercase text-secondary">Email</label>
+                            <div class="form-group has-icon"><input type="text" id="email" name="email" class="form-control form-control-rounded" placeholder="Your registered username" required> <i class="icon fas fa-user"></i></div><label class="control-label bold small text-uppercase text-secondary">Password</label>
+                            <div class="form-group has-icon"><input type="password" id="password" name="password" class="form-control form-control-rounded" placeholder="Your password" required> <i class="icon fas fa-lock"></i></div>
                             <div class="form-group d-flex align-items-center justify-content-between"><a href="forgot.html" class="text-warning small">Forgot your password?</a>
                                 <div class="ajax-button">
                                     <div class="fas fa-check btn-status text-success success"></div>
-                                    <div class="fas fa-times btn-status text-danger failed"></div><button type="submit" class="btn btn-primary btn-rounded">Login <i class="fas fa-long-arrow-alt-right ml-2"></i></button>
+                                    <div class="fas fa-times btn-status text-danger failed"></div><button id="login_btn" type="submit" class="btn btn-primary btn-rounded">Login <i class="fas fa-long-arrow-alt-right ml-2"></i></button>
                                 </div>
                             </div>
                         </form>
@@ -97,6 +97,38 @@
     <script src="js/svg.js"></script>
     <script src="js/site.js"></script>
     <script src="js/03.demo.js"></script><!-- endinject -->
+
+    <script>
+        $("#login_btn").on('click', function(e) {
+            e.preventDefault();
+            var form = $("#login_form");
+
+            var email = form.find('input[name="email"]').val();
+            var password = form.find('input[name="password"]').val();
+
+            var formData = JSON.stringify({email: email, password: password});
+            var responseData;
+            console.log(formData);
+            $.ajax({
+                url: "http://206.189.54.1/user/login",
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: formData,
+                success: function(data) {
+                    console.log(data);
+                    responseData = data;
+                    if (responseData == 200){
+                        window.location = "index.html";
+                    }
+                    else 
+                        alert(" Login-ul a esuat! Te rugam sa incerci din nou! ");
+                }
+            })
+        });
+
+
+    </script>
 </body>
 
 </html>
