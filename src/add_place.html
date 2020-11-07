@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><!-- Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,300,400,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+    <title>Dashcore - Premium Software & Startup HTML</title><!-- themeforest:css -->
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/cookieconsent.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/odometer-theme-minimal.css">
+    <link rel="stylesheet" href="css/prism-okaidia.css">
+    <link rel="stylesheet" href="css/simplebar.css">
+    <link rel="stylesheet" href="css/smart_wizard.css">
+    <link rel="stylesheet" href="css/smart_wizard_theme_arrows.css">
+    <link rel="stylesheet" href="css/smart_wizard_theme_circles.css">
+    <link rel="stylesheet" href="css/smart_wizard_theme_dots.css">
+    <link rel="stylesheet" href="css/swiper.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/rtl.css"><!-- endinject -->
+
+    <style>
+        .my_map {
+            height: 400px;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+   
+    <div id="navbar"></div>
+    <script src="js/jquery.js"></script>
+    <script>$("#navbar").load("partials/nav.html")</script>
+
+    <main>
+        <header class="page header text-contrast overlay gradient gradient-purple-blue alpha-8 image-background cover" style="background-image: url('../img/bg/waves.jpg'); padding-top: 90px;">
+            <div class="container py-4">
+                <div class="col-md-6">
+                    <h1 class="display-4 text-contrast mb-4">Add a new place</h1>
+                    <p class="lead text-contrast">
+                        Don't forget to add an interesting description and some cool secret informations!
+                    </p>
+                </div>
+            </div>
+        </header>
+        <section>
+            <div class="container py-5">
+                <form id="add_place_form" action="http://206.189.54.1/marker/add" method="post">
+                    <h3>Title</h3>
+                    <div class="form-group mb-5" style="max-width: 300px;">
+                        <input type="text" id="title" name="title" class="form-control form-control-rounded" placeholder="Title" required>
+                    </div>
+
+                    <h3>Choose a location</h3>
+                        <div class="mb-5">
+                        <p class="text-muted mt-0">
+                            1. Search for a place to add a marker on the map <br/>
+                            2. You can drag the marker, so that the location is super precise!</p>
+                        <div class="pac-card" id="pac-card">
+                            <div id="pac-container" class="mt-2 mr-2" style="max-width: 300px;">
+                                <input id="pac-input" class="form-control form-control-rounded" type="text" placeholder="Enter a location" />
+                            </div>
+                        </div>
+                        <div class="my_map" id="map"></div>
+                        <label id="location-error" for="pac-input" style="color: #c1002b; font-size: 0.875rem;" hidden>A map location is required.</label>
+                    </div>
+
+                    <h3>Score</h3>
+                    <p class="text-muted mt-0">Set a score according to these <a href="score_guidelines.html">guidelines</a>!</p>
+                    <div class="form-group mb-5" style="max-width: 300px;">
+                        <input type="number" id="score" name="score" min="100" class="form-control form-control-rounded" placeholder="Score" value=100 required>
+                    </div>
+
+                    <h3>Description</h3>
+                    <p class="text-muted mt-0">Fill in a comprehensive description about this place.</p>
+                    <div class="form-group mb-5 col-lg-4 px-0">
+                        <textarea id="description" name="description" class="form-control form-control-rounded" rows=4 minlength="20" placeholder="Short description" required></textarea>
+                    </div>
+
+                    <h3>Reward information</h3>
+                    <p class="text-muted mt-0">Write here some interesting details about this itinerary.</p>
+                    <div class="form-group mb-5 col-lg-4 px-0">
+                        <textarea id="secret_info" name="secret_info" class="form-control form-control-rounded" placeholder="Reward information" required></textarea>
+                    </div>
+
+                    <div class="form-group"><button id="add_place_btn" type="submit" class="btn btn-primary btn-rounded">Add place <i class="fas fa-check ml-2"></i></button></div>
+                </form>
+            </div>
+        </section>
+
+        <div id="footer"></div>
+        <script src="js/jquery.js"></script>
+        <script>$("#footer").load("partials/footer.html")</script>
+        
+    </main><!-- themeforest:js -->
+    <script src="js/01.cookie-consent-util.js"></script>
+    <script src="js/02.1.cookie-consent-themes.js"></script>
+    <script src="js/02.2.cookie-consent-custom-css.js"></script>
+    <script src="js/02.3.cookie-consent-informational.js"></script>
+    <script src="js/02.4.cookie-consent-opt-out.js"></script>
+    <script src="js/02.5.cookie-consent-opt-in.js"></script>
+    <script src="js/02.6.cookie-consent-location.js"></script>
+    <script src="js/card.js"></script>
+    <script src="js/counterup2.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/noframework.waypoints.js"></script>
+    <script src="js/odometer.min.js"></script>
+    <script src="js/prism.js"></script>
+    <script src="js/simplebar.js"></script>
+    <script src="js/swiper.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/jquery.smartWizard.js"></script>
+    <script src="js/plugins/jquery.animatebar.js"></script>
+    <script src="js/feather.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/typed.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/cookieconsent.min.js"></script>
+    <script src="js/common-script.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/stripe-bubbles.js"></script>
+    <script src="js/stripe-menu.js"></script>
+    <script src="js/cc.js"></script>
+    <script src="js/pricing.js"></script>
+    <script src="js/shop.js"></script>
+    <script src="js/svg.js"></script>
+    <script src="js/site.js"></script>
+    <script src="js/03.demo.js"></script>
+    <script src="js/js.cookie.min.js"></script>
+
+    <script>
+        var selected_lat;
+        var selected_lng;
+
+        var script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBpOk5SZFZKY2FHopmbi7WKi_cf3rWVRFc&libraries=places&callback=initMap';
+        script.defer = true;
+        
+        // Attach your callback function to the `window` object
+        window.initMap = function() {
+            // The location of Uluru
+            const uluru = { lat: 45.439663, lng:25.096306 };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 6,
+                center: uluru,
+            });
+
+            const card = document.getElementById("pac-card");
+            const input = document.getElementById("pac-input");
+            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo("bounds", map);
+            // Set the data fields to return when the user selects a place.
+            autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
+
+            const marker = new google.maps.Marker({
+                map,
+                draggable: true,
+                anchorPoint: new google.maps.Point(0, -29),
+            });
+
+            autocomplete.addListener("place_changed", () => {
+                marker.setVisible(false);
+                const place = autocomplete.getPlace();
+            
+                if (!place.geometry) {
+                  return;
+                }
+            
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17); // Why 17? Because it looks good.
+                }
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                selected_lat = place.geometry.location.lat();
+                selected_lng = place.geometry.location.lng();
+
+                $("#location-error").attr("hidden", true);
+            });
+        };
+
+        document.head.appendChild(script);
+
+        $("#add_place_form").submit(function(e) {
+            e.preventDefault();
+             
+            // check for coords
+            if(!selected_lat || !selected_lng) {
+                $("#location-error").removeAttr("hidden");
+                return;
+            } else {
+                $("#location-error").attr("hidden", true);
+            }
+
+            var title = $("#title").val();
+            var lat = selected_lat;
+            var long = selected_lng;
+            var score = $("#score").val();
+            var description = $("#description").val();
+            var secret_info = $("#secret_info").val();
+
+            var formData = JSON.stringify({title, lat, long, score, description, secret_info});
+            var token = Cookies.get('auth-token');
+            $.ajax({
+                url: "http://206.189.54.1/marker/add",
+                type: 'post',
+                contentType: 'application/json',
+                data: formData,
+                headers: {'auth-token': token},
+                success: function(data, textStatus, jqXHR) {
+                    window.location = "index.html";
+                },
+                error: function(jqXHR) {
+                    console.log(jqXHR);
+                    if (jqXHR.responseJSON) {
+                        jqXHR.responseJSON.details.forEach(detail => {
+                            alert(detail.message);
+                        })
+                    } else {
+                        alert(jqXHR.responseText);
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
