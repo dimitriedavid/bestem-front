@@ -25,6 +25,19 @@
     <link rel="stylesheet" href="css/swiper.css">
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/rtl.css"><!-- endinject -->
+
+    <style>
+        @media screen and (max-width: 768px) {
+            .main-figure {
+                height: 1080px;
+            }
+        }
+        @media screen and (min-width: 768px) {
+            .main-figure {
+                height: 850px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -38,26 +51,24 @@
 
     <main>
         <!-- ./App Landing - page header -->
-        <header class="section header text-contrast app-landing-header">
-            <div class="shape-wrapper">
+        <header class="section header text-contrast app-landing-header" style="padding-top: 90px;">
+            <div class="shape-wrapper main-figure">
                 <div class="shape shape-background shape-main gradient gradient-purple-navy"></div>
                 <div class="shape shape-background shape-top gradient gradient-navy-purple"></div>
             </div>
             <div class="container overflow-hidden">
                 <div class="row gap-y align-items-center">
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-9 col-lg-9">
                         <p class="lead d-flex align-items-center my-0"><i class="fas fa-award font-md mr-3"></i>The app that every modern traveler should have!</p>
                         <h1 class="bold text-contrast display-lg-2 font-lg mb-5">DRey <span class="d-block light font-md">Search and go</span></h1>
                         <p class="lead">You search for an area and we will show you the must-see places!</p>
-                        <div class="nav mt-5 align-items-center"><a href="#" class="btn btn-rounded btn-lg btn-info shadow mr-3 px-4 text-capitalize">Search now!</a></div>
-                    </div>
-                    <div class="col-md-6 col-lg-5 ml-lg-auto">
-                        <div data-aos="fade-left">
-                            <div class="mobile-device iphone-x">
-                                <div class="screen"><img src="img/screens/app/2.png" class="img-responsive" alt=""></div>
-                                <div class="notch"></div>
+                        <div class="nav align-items-center">
+                            <div class="col-lg-6 pl-0 pl-lg-1">
+                                <input type="text" class="form-control form-control-rounded" placeholder="Enter a location" id="pac-input">
                             </div>
-                            <div class="absolute screen-highlight center-x w-100"><img src="img/screens/app/2-highlight.png" alt="" class="mx-auto shadow-lg rounded img-responsive" data-aos-delay="1000" data-aos="zoom-in"></div>
+                            <div class="col-lg-4 pl-0 mt-2 mt-lg-0">
+                                <a id="search_now" class="btn btn-rounded btn-lg btn-info shadow mr-3 px-4 text-capitalize">Search now!</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -367,8 +378,62 @@
     <script src="js/svg.js"></script>
     <script src="js/site.js"></script>
     <script src="js/03.demo.js"></script>
+    <script>
+        var searched_lat;
+        var searched_long;
+        var searched_text;
 
-    <!-- Navbar -->
+        var script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBpOk5SZFZKY2FHopmbi7WKi_cf3rWVRFc&libraries=places&callback=initMap';
+        script.defer = true;
+        
+        // Attach your callback function to the `window` object
+        window.initMap = function() {
+            const input = document.getElementById("pac-input");
+            const autocomplete = new google.maps.places.Autocomplete(input);
+
+            // Set the data fields to return when the user selects a place.
+            autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
+
+            autocomplete.addListener("place_changed", () => {
+                const place = autocomplete.getPlace();
+            
+                if (!place.geometry) {
+                    // User entered the name of a Place that was not suggested and
+                    // pressed the Enter key, or the Place Details request failed.
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+                searched_lat = place.geometry.location.lat();
+                searched_long = place.geometry.location.lng();
+                searched_text = input.value;
+            });
+    
+        };
+
+        $("#search_now").on('click', function(e) {
+            console.log('here');
+            if (!searched_text || !searched_lat || !searched_long) {
+                // fields not complete
+                alert('Please enter a location!');
+            } else {
+                window.location = 'places.html?lat=' + searched_lat + '&lng=' + searched_long + '&text=' + searched_text;
+            }
+        });
+        
+        // Append the 'script' element to 'head'
+        document.head.appendChild(script);
+    </script>
+
+    <script src="js/js.cookie.min.js"></script>
+    <script>
+        var loggedIn = Cookies.get('auth-token')
+        if (!loggedIn) {
+            $("#pac-input").focus(function(e) {
+                window.location = "login.html";
+            });
+        }
+    </script>
 
 </body>
 

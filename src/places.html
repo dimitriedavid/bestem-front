@@ -25,39 +25,40 @@
     <link rel="stylesheet" href="css/swiper.css">
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/rtl.css"><!-- endinject -->
+
+    <style>
+        .my_map {
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 
 <body>
     <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
+   
+    <div id="navbar"></div>
+    <script src="js/jquery.js"></script>
+    <script>$("#navbar").load("partials/nav.html")</script>
+
     <main>
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-6 col-lg-7 fullscreen-md d-flex justify-content-center align-items-center overlay gradient gradient-purple-navy alpha-7 image-background cover" style="background-image:url(https://picsum.photos/1920/1200/?random&gravity=south)">
-                    <div class="content">
-                        <h2 class="display-4 display-md-3 text-contrast mt-4 mt-md-0">Welcome to <span class="bold d-block">Dashcore</span></h2>
-                        <p class="lead text-contrast">Login to your account</p>
-                        <hr class="mt-md-6 w-25">
-                    </div>
-                </div>
-                <div class="col-md-5 col-lg-4 mx-auto">
-                    <div class="login-form mt-5 mt-md-0"><img src="img/logo.png" class="logo img-responsive mb-4 mb-md-6" alt="">
-                        <h1 class="text-darker bold">Login</h1>
-                        <p class="text-secondary mt-0 mb-4 mb-md-6">Don't have an account yet? <a href="register.html" class="text-primary bold">Create it here</a></p>
-                        <form id="login_form" class="cozy" action="http://206.189.54.1/user/register" method="post">
-                            <div class="form-group has-icon">
-                                <input type="email" id="email" name="email" class="form-control form-control-rounded" placeholder="Valid email" required> <i class="icon fas fa-envelope"></i>
-                            </div>
-                            <div class="form-group has-icon">
-                                <input type="password" id="password" name="password" class="form-control form-control-rounded" placeholder="Password" minlength="6" required> <i class="icon fas fa-lock"></i>
-                            </div>
-                            <div class="form-group d-flex align-items-center justify-content-between"><button id="login_btn" type="submit" class="btn btn-primary btn-rounded ml-auto">Log in <i class="fas fa-long-arrow-alt-right ml-2"></i></button></div>
-                        </form>
+        <header class="page header text-contrast overlay gradient gradient-purple-blue alpha-8 image-background cover" style="background-image: url('../img/bg/waves.jpg'); padding-top: 90px;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="my_map" id="map">
+
                     </div>
                 </div>
             </div>
-        </div>
+        </header>
+
+        <div id="footer"></div>
+        <script src="js/jquery.js"></script>
+        <script>$("#footer").load("partials/footer.html")</script>
+        
     </main><!-- themeforest:js -->
     <script src="js/01.cookie-consent-util.js"></script>
     <script src="js/02.1.cookie-consent-themes.js"></script>
@@ -87,6 +88,7 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/cookieconsent.min.js"></script>
     <script src="js/common-script.js"></script>
+    <script src="js/forms.js"></script>
     <script src="js/stripe-bubbles.js"></script>
     <script src="js/stripe-menu.js"></script>
     <script src="js/cc.js"></script>
@@ -94,42 +96,37 @@
     <script src="js/shop.js"></script>
     <script src="js/svg.js"></script>
     <script src="js/site.js"></script>
-    <script src="js/03.demo.js"></script><!-- endinject -->
-    <script src="js/js.cookie.min.js"></script>
+    <script src="js/03.demo.js"></script>
+
     <script>
-        $("#login_form").submit('click', function(e) {
-            e.preventDefault();
-            var form = $("#login_form");
+        let searchParams = new URLSearchParams(window.location.search);
+        var my_lat;
+        var my_lng;
+        var my_text;
+        if (searchParams.has('lat') && searchParams.has('lng') && searchParams.has('text')) {
+            my_lat = parseFloat(searchParams.get('lat'));
+            my_lng = parseFloat(searchParams.get('lng'));
+            my_text = searchParams.get('text');
+        } else {
+            window.location = "index.html";
+        }
 
-            var email = form.find('input[name="email"]').val();
-            var password = form.find('input[name="password"]').val();
+        var script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBpOk5SZFZKY2FHopmbi7WKi_cf3rWVRFc&libraries=places&callback=initMap';
+        script.defer = true;
+        
+        // Attach your callback function to the `window` object
+        window.initMap = function() {
+            // The location of Uluru
+            const uluru = { lat: my_lat, lng:my_lng };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 13,
+                center: uluru,
+            });
+        };
 
-            var formData = JSON.stringify({email: email, password: password});
-            var responseData;
-            $.ajax({
-                url: "http://206.189.54.1/user/login",
-                type: 'post',
-                contentType: 'application/json',
-                data: formData,
-                success: function(data, textStatus, jqXHR) {
-                    var token = jqXHR.getResponseHeader('auth-token');
-                    Cookies.set('auth-token', token, { expires: 30})
-                    window.location = "index.html";
-                },
-                error: function(jqXHR) {
-                    console.log(jqXHR);
-                    if (jqXHR.responseJSON) {
-                        jqXHR.responseJSON.details.forEach(detail => {
-                            alert(detail.message);
-                        })
-                    } else {
-                        alert(jqXHR.responseText);
-                    }
-                }
-            })
-        });
-
-
+        document.head.appendChild(script);
     </script>
 </body>
 
