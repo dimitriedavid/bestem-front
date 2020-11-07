@@ -35,7 +35,32 @@
     <div id="navbar"></div>
     <script src="js/jquery.js"></script>
     <script>$("#navbar").load("partials/nav.html")</script>
+    <style>
+        .profile-wrapper {
+            width: 100%;
+            position: relative;
+            height: 500px;
+            /* background-color: green; */
+        }
 
+        .left {
+            position: relative;
+            left: 0px;
+            top: 0px;
+            width: 35%;
+            height: 100%;
+            /* background-color: red; */
+        }
+
+        .right {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            width: 65%;
+            /* background-color: blue; */
+            height: 100%;
+        }
+    </style>
     <main>
         <!-- ./App Landing - page header -->
         <header class="section header text-contrast app-landing-header">
@@ -43,16 +68,70 @@
                 <div class="shape shape-background shape-main gradient gradient-purple-navy"></div>
                 <div class="shape shape-background shape-top gradient gradient-navy-purple"></div>
             </div>
+
             <div class="container overflow-hidden">
                 <div class="row gap-y align-items-center">
                     <div class="col-lg-12" style="min-height: 600px">
                         <!-- CONTENT -->
+
+                        <!-- cauta  locatie sau alt utilizator -->
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text" id="btnGroupAddon"><i class="fas fa-search"></i></div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Search for a new place to dicover" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                          </div>
+
+                        <br>
+                        <!-- poza de profil + numar puncte -->
+                        <div class="profile-wrapper">
+                            <div class="left">
+                                <h3>Diana Dutica</h3>
+                                <img src="../profile-photo.png" class="img-circle" alt="User Profile" width="200" height="200">
+                                <h3 style="font-size: 20px;">Username: DianaDutica</h3>
+                                <h3 style="font-size: 20px;">Email: dutica_diana@yahoo.com</h3>
+                                <h3 style="font-size: 20px;"><i class="fas fa-map-marker-alt"></i>   points: 270</h3>
+                                <h3 style="font-size: 20px;"><i class="fas fa-trophy"></i>  badges: 7</h3>
                         
+                            </div>
+                            
+                            <div class="right">
+                                <button type="button" class="btn btn-danger float-right">Logout</button>
+
+                                <button type="button" class="btn btn-info float-right"><i class="fas fa-user-cog"></i>  Admin Pannel</button>
+                            </div>
+
+                            <!--  
+                                    // judete cu punctaje
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                      Cras justo odio
+                                      <span class="badge badge-primary badge-pill">14</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                      Dapibus ac facilisis in
+                                      <span class="badge badge-primary badge-pill">2</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                      Morbi leo risus
+                                      <span class="badge badge-primary badge-pill">1</span>
+                                    </li>
+                                  </ul> 
+                                -->
+                                <h2> The latest locations you checked-in are: </h2>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-action">Locatie 1</a>
+                                    <a href="#" class="list-group-item list-group-item-action">Locatie 2</a>
+                                    <a href="#" class="list-group-item list-group-item-action">LOcatie 3</a>
+                                    <a href="#" class="list-group-item list-group-item-action">Locatie 4</a>
+                                    <a href="#" class="list-group-item list-group-item-action">LOcatie 5</a>
+                                  </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
-        
+
         <footer class="site-footer section text-center block bg-contrast">
             <div class="container py-4">
                 <h2 class="font-md regular">Stay updated</h2>
@@ -71,9 +150,8 @@
                     </div>
                 </div>
             </div>
-            <hr class="mt-5">
-            <nav class="nav social-icons justify-content-center mt-4"><a href="#" class="mr-3 font-regular text-secondary"><i class="fab fa-facebook-f"></i></a> <a href="#" class="mr-3 font-regular text-secondary"><i class="fab fa-twitter"></i></a> <a href="#" class="mr-3 font-regular text-secondary"><i class="fab fa-instagram"></i></a> <a href="#" class="mr-3 font-regular text-secondary"><i class="fas fa-rss"></i></a> <a href="#" class="font-regular text-secondary"><i class="fab fa-linkedin-in"></i></a></nav>
-            <p class="small copyright text-secondary">© 2018 Dashcore, <em>by</em> <a class="brand bold" href="http://www.5studios.net">5Studios.net</a></p>
+            
+           
         </footer>
     </main><!-- themeforest:js -->
     <script src="js/01.cookie-consent-util.js"></script>
@@ -115,6 +193,8 @@
     <script src="js/03.demo.js"></script>
 
     <!-- Navbar -->
+
+    
 
 </body>
 
