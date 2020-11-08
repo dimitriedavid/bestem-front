@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><!-- Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,300,400,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+    <title>Dashcore - Premium Software & Startup HTML</title><!-- themeforest:css -->
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/cookieconsent.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/odometer-theme-minimal.css">
+    <link rel="stylesheet" href="css/prism-okaidia.css">
+    <link rel="stylesheet" href="css/simplebar.css">
+    <link rel="stylesheet" href="css/smart_wizard.css">
+    <link rel="stylesheet" href="css/smart_wizard_theme_arrows.css">
+    <link rel="stylesheet" href="css/smart_wizard_theme_circles.css">
+    <link rel="stylesheet" href="css/smart_wizard_theme_dots.css">
+    <link rel="stylesheet" href="css/swiper.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/rtl.css"><!-- endinject -->
+
+    <style>
+        .my_map {
+            height: 400px;
+            width: 400px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+   
+    <div id="navbar"></div>
+    <script src="js/jquery.js"></script>
+    <script>$("#navbar").load("partials/nav.html")</script>
+
+    <main>
+        <header class="page header text-contrast overlay gradient gradient-purple-blue alpha-8 image-background cover" style="background-image: url('img/bg/waves.jpg'); padding-top: 90px;">
+            <div class="container py-4">
+                <div class="row justify-content-center">
+                    <div class="my_map" id="map">
+
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <button id="check_in" type="button" class="btn btn-lg btn-warning btn-rounded" disabled>Check in</button>
+                    <h6 id="already_checked_in" class="text-contrast" hidden>Location checked in! Congrats!</h6>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="container py-4">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div id="secret-info-div" class="mb-5" hidden>
+                            <h4 class="text-success">Congrats! <br />
+                                You unlocked this secret information:</h4>
+                            <h4 id="secret-info">Secret</h4>
+                        </div>
+                        <h2 id="title">Title</h2>
+                        <h3><i class="fas fa-star"></i> <span id="score">100</span></h3>
+                        <div id="achievement"></div>
+                        <a href="javascript:;" class="h3 d-flex align-items-center text-secondary mr-3 blog-action blog-favorite"><i class="fas fa-heart text-danger mr-2"></i> <span class="small" id="likes">347</span> </a>
+                        <h4 id="description">Description</h4>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div id="footer"></div>
+        <script src="js/jquery.js"></script>
+        <script>$("#footer").load("partials/footer.html")</script>
+        
+    </main><!-- themeforest:js -->
+    <script src="js/01.cookie-consent-util.js"></script>
+    <script src="js/02.1.cookie-consent-themes.js"></script>
+    <script src="js/02.2.cookie-consent-custom-css.js"></script>
+    <script src="js/02.3.cookie-consent-informational.js"></script>
+    <script src="js/02.4.cookie-consent-opt-out.js"></script>
+    <script src="js/02.5.cookie-consent-opt-in.js"></script>
+    <script src="js/02.6.cookie-consent-location.js"></script>
+    <script src="js/card.js"></script>
+    <script src="js/counterup2.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/noframework.waypoints.js"></script>
+    <script src="js/odometer.min.js"></script>
+    <script src="js/prism.js"></script>
+    <script src="js/simplebar.js"></script>
+    <script src="js/swiper.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/jquery.smartWizard.js"></script>
+    <script src="js/plugins/jquery.animatebar.js"></script>
+    <script src="js/feather.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/typed.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/cookieconsent.min.js"></script>
+    <script src="js/common-script.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/stripe-bubbles.js"></script>
+    <script src="js/stripe-menu.js"></script>
+    <script src="js/cc.js"></script>
+    <script src="js/pricing.js"></script>
+    <script src="js/shop.js"></script>
+    <script src="js/svg.js"></script>
+    <script src="js/site.js"></script>
+    <script src="js/03.demo.js"></script>
+
+    <script src="js/js.cookie.min.js"></script>
+    <script src="js/authorization.js"></script>
+
+    <script>
+        let searchParams = new URLSearchParams(window.location.search);
+        var id;
+        var my_lat;
+        var my_lng;
+        var my_data;
+        var my_map;
+        var loc_marker;
+        var update = true;
+        var geoPos;
+        var my_circle;
+        var checkedIn = false;
+        if (searchParams.has('id')) {
+            id = searchParams.get('id');
+        } else {
+            window.location = "index.html";
+        }
+
+        var token = Cookies.get('auth-token');
+        var formData = JSON.stringify({id: id});
+        $.ajax({
+            url: "http://206.189.54.1/marker/get",
+            type: 'post',
+            headers: {'auth-token': token},
+            contentType: 'application/json',
+            data: formData,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data)
+                my_data = data.marker;
+                my_lat = my_data.coords.lat;
+                my_lng = my_data.coords.long;
+                checkedIn = data.checked;
+                $("#title").text(my_data.title);
+                $("#likes").text(my_data.likes);
+                $("#score").text(my_data.score);
+                $("#description").text(my_data.description);
+                if (checkedIn) {
+                    $("#already_checked_in").removeAttr("hidden");
+                    $("#check_in").attr("hidden", true);
+                    $("#secret-info-div").removeAttr("hidden");
+                    $("#secret-info").text(my_data.secret_info);
+                }
+                if (my_data.achievement) {
+                        $("#achievement").append('<h3><i class="fas fa-trophy"></i> <span id="achievement">' + my_data.achievement + '</span></h3>')
+                }
+                loadMap();
+            },
+            error: function(jqXHR) {
+                console.log(jqXHR);
+                if (jqXHR.responseJSON) {
+                    jqXHR.responseJSON.details.forEach(detail => {
+                        alert(detail.message);
+                    })
+                } else {
+                    alert(jqXHR.responseText);
+                }
+            }
+        })
+
+        function loadMap() {
+            var script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBpOk5SZFZKY2FHopmbi7WKi_cf3rWVRFc&libraries=places&callback=initMap';
+            script.defer = true;
+            
+            // Attach your callback function to the `window` object
+            window.initMap = function() {
+                google.maps.Circle.prototype.contains = function(latLng) {
+                    return this.getBounds().contains(latLng) && google.maps.geometry.spherical.computeDistanceBetween(this.getCenter(), latLng) <= this.getRadius();
+                }
+                // The location of Uluru
+                const uluru = { lat: my_lat, lng:my_lng };
+                // The map, centered at Uluru
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 16,
+                    center: uluru,
+                });
+
+                const infoWindow = new google.maps.InfoWindow({
+                    content: '<h6 style="margin-bottom: 0px;">' + my_data.title + "</h6>"
+                })
+
+                const marker = new google.maps.Marker({
+                    position: uluru,
+                    map,
+                    title: my_data.title,
+                })
+
+                marker.addListener("click", () => {
+                    infoWindow.open(map, marker);
+                    map.setZoom(16);
+                });
+
+                loc_marker = new google.maps.Marker({
+                    icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+                            new google.maps.Size(22,22),
+                            new google.maps.Point(0,18),
+                            new google.maps.Point(11,11)),
+                    position: uluru,
+                    map,
+                    title: my_data.title,
+                })
+
+                my_circle = new google.maps.Circle({
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: "#FF0000",
+                    fillOpacity: 0.35,
+                    map,
+                    center: uluru,
+                    radius: 100
+                })
+
+                // start update loop
+                my_map = map;
+                if (!checkedIn) {
+                    updateLocation();
+                    console.log("started location update");
+                }
+            }
+            document.head.appendChild(script);
+        };
+
+        function updateLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        if (update) {
+                            geoPos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude,
+                            };
+                        }
+                    });
+            } else {
+                alert("This browser does not support geolocation!");
+                return;
+            }
+
+            loc_marker.setPosition(geoPos);
+            checkLocation();
+            setTimeout(function() { updateLocation(); }, 1000);
+        }
+
+        function checkLocation() {
+            if(geoPos) {
+                var latlng = new google.maps.LatLng({lat: geoPos.lat, lng: geoPos.lng});
+                if(my_circle.contains(latlng)) {
+                    $("#check_in").removeAttr("disabled");
+                } else {
+                    $("#check_in").attr("disabled", true);
+                }
+            }
+        }
+
+        $("#check_in").on("click", function(e) {
+        var token = Cookies.get('auth-token');
+        var formData = JSON.stringify({id: id});
+        $.ajax({
+            url: "http://206.189.54.1/marker/checkIn",
+            type: 'post',
+            headers: {'auth-token': token},
+            contentType: 'application/json',
+            data: formData,
+            success: function(data, textStatus, jqXHR) {
+                location.reload();
+            },
+            error: function(jqXHR) {
+                console.log(jqXHR);
+                if (jqXHR.responseJSON) {
+                    jqXHR.responseJSON.details.forEach(detail => {
+                        alert(detail.message);
+                    })
+                } else {
+                    alert(jqXHR.responseText);
+                }
+            }
+        })
+        })
+
+        function fakeLocation() {
+            update = false;
+            setTimeout(function() {
+                geoPos = {
+                    lat: my_lat,
+                    lng: my_lng,
+                };
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

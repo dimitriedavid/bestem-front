@@ -183,7 +183,7 @@
 
         function addMark(mark, i, username) {
             var html_content =  '<div class="col-md-6 col-lg-4" id="' + i + '">' +
-                                    '<div class="card card-blog shadow-box shadow-hover border-0"><a href="blog-post.html"><img class="card-img-top img-responsive" src="https://picsum.photos/350/200/?random&amp;gravity=north" alt=""></a>' +
+                                    '<div class="card card-blog shadow-box shadow-hover border-0"><a href="check_in.html?id=' + mark._id + '"><img class="card-img-top img-responsive" src="' + mark.photo + '" alt=""></a>' +
                                         '<div class="card-body">' +
                                             '<div class="d-flex align-items-center justify-content-between">' +
                                                 '<div class="author d-flex align-items-center"><img class="author-picture rounded-circle icon-md shadow-box" src="img/avatar/user.png" alt="...">' +
@@ -194,8 +194,11 @@
                                                 '</nav>' +
                                             '</div>' +
                                             '<hr>' +
-                                            '<p><i class="fas fa-star"></i> ' + mark.score + '</p>' +
-                                            '<p class="card-title regular"><a href="blog-post.html">' + mark.title + '</a></p>' +
+                                            '<p><i class="fas fa-star"></i> ' + mark.score + '</p>';
+                                            if (mark.achievement) {
+                                                html_content += '<p><i class="fas fas fa-trophy"></i> ' + mark.achievement + '</p>';
+                                            }
+                            html_content += '<p class="card-title regular"><a href="check_in.html?id=' + mark._id + '">' + mark.title + '</a></p>' +
                                             '<p class="card-text text-secondary">' + mark.description + '</p>' +
                                         '</div>' +
                                     '</div>' +

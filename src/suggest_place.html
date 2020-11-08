@@ -242,7 +242,7 @@
             var formData = JSON.stringify({title, lat, long, score, description, secret_info, photo, achievement});
             var token = Cookies.get('auth-token');
             $.ajax({
-                url: "http://206.189.54.1/marker/add",
+                url: "http://206.189.54.1/marker/suggest",
                 type: 'post',
                 contentType: 'application/json',
                 data: formData,
