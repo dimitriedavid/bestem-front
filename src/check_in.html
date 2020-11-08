@@ -71,7 +71,7 @@
                         <h2 id="title">Title</h2>
                         <h3><i class="fas fa-star"></i> <span id="score">100</span></h3>
                         <div id="achievement"></div>
-                        <a href="javascript:;" class="h3 d-flex align-items-center text-secondary mr-3 blog-action blog-favorite"><i class="fas fa-heart text-danger mr-2"></i> <span class="small" id="likes">347</span> </a>
+                        <a id="love_button" href="javascript:;" class="h3 d-flex align-items-center text-secondary mr-3 blog-action blog-favorite"><i class="fas fa-heart text-danger mr-2"></i> <span class="small" id="likes">347</span> </a>
                         <h4 id="description">Description</h4>
 
                     </div>
@@ -315,6 +315,27 @@
                 };
             }, 1000);
         }
+
+        $("#love_button").on('click', function() {
+            var token = Cookies.get('auth-token');
+            var formData = JSON.stringify({_id: id});
+            $.ajax({
+                url: "http://206.189.54.1/marker/love",
+                type: 'post',
+                headers: {'auth-token': token},
+                contentType: 'application/json',
+                data: formData,
+                success: function(data, textStatus, jqXHR) {
+                    var texter = $("#likes");
+                    var likes = parseInt(texter.text());
+                    likes += 1;
+                    texter.text(likes.toString())
+                },
+                error: function(jqXHR) {
+                    console.log(jqXHR);
+                }
+            })
+        })
     </script>
 </body>
 

@@ -26,13 +26,6 @@
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/rtl.css"><!-- endinject -->
 
-    <style>
-        .my_map {
-            height: 400px;
-            width: 100%;
-            border-radius: 10px;
-        }
-    </style>
 </head>
 
 <body>
@@ -47,14 +40,7 @@
     <main>
         <header class="page header text-contrast overlay gradient gradient-purple-blue alpha-8 image-background cover" style="background-image: url('../img/bg/waves.jpg'); padding-top: 90px;">
             <div class="container pb-3">
-                <div class="row justify-content-center">
-                    <div class="my_map" id="map">
-
-                    </div>
-                </div>
-                <div class="row justify-content-center mt-4">
-                    <a onClick="leaderboard()" class="btn btn-rounded btn-lg btn-primary shadow mr-3 px-4 text-capitalize">Location leaderboard</a>
-                </div>
+                <h1 class="text-contrast">Leaderboard <span>Location</span></h1>
             </div>
         </header>
 
@@ -123,57 +109,19 @@
             window.location = "index.html";
         }
 
-        function leaderboard() {
-            window.location = 'leaderboard.html?lat=' + my_lat + '&lng=' + my_lng + '&text=' + my_text;
-        }
+        fetchLeaderboard();
 
-        var script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBpOk5SZFZKY2FHopmbi7WKi_cf3rWVRFc&libraries=places&callback=initMap';
-        script.defer = true;
-        
-        // Attach your callback function to the `window` object
-        window.initMap = function() {
-            // The location of Uluru
-            const uluru = { lat: my_lat, lng:my_lng };
-            // The map, centered at Uluru
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 13,
-                center: uluru,
-            });
-
-            fetchMap(map);
-        };
-
-        document.head.appendChild(script);
-
-        function fetchMap(map) {
+        function fetchLeaderboard(map) {
             var token = Cookies.get('auth-token');
             var formData = JSON.stringify({lat: my_lat, long: my_lng, dist: 10000});
             $.ajax({
-                url: "http://206.189.54.1/marker/getMarkersByDistance",
+                url: "http://206.189.54.1/marker/getLeaderboardByDist",
                 type: 'post',
                 headers: {'auth-token': token},
                 contentType: 'application/json',
                 data: formData,
                 success: function(data, textStatus, jqXHR) {
-                    data.forEach(function(obj, i) {
-                        var mark = obj.marker;
-                        console.log(mark)
-                        console.log(i)
-                        // add marker
-                        var marker = new google.maps.Marker({
-                            position: {lat: mark.coords.lat, lng: mark.coords.long},
-                            map,
-                            title: mark.title
-                        })
-                        marker.addListener("click", () => {
-                            window.location.hash = "";
-                            window.location.hash = i.toString();
-                        });
-
-                        // add mark to grid
-                        addMark(mark, i, obj.username);
-                    })
+                    console.log(data)
                 },
                 error: function(jqXHR) {
                     console.log(jqXHR);
@@ -184,52 +132,6 @@
                     } else {
                         alert(jqXHR.responseText);
                     }
-                }
-            })
-        }
-
-        function addMark(mark, i, username) {
-            var html_content =  '<div class="col-md-6 col-lg-4" id="' + i + '">' +
-                                    '<div class="card card-blog shadow-box shadow-hover border-0"><a href="check_in.html?id=' + mark._id + '"><img class="card-img-top img-responsive" src="' + mark.photo + '" alt=""></a>' +
-                                        '<div class="card-body">' +
-                                            '<div class="d-flex align-items-center justify-content-between">' +
-                                                '<div class="author d-flex align-items-center"><img class="author-picture rounded-circle icon-md shadow-box" src="img/avatar/user.png" alt="...">' +
-                                                    '<p class="small bold my-0">' + username + '</p>' +
-                                                '</div>' +
-                                                '<nav class="nav">' +
-                                                    '<a href="javascript:;" onClick="like(\'' + mark._id + '\', ' + i + ')" class="d-flex align-items-center text-secondary mr-3 blog-action blog-favorite"><i class="fas fa-heart text-danger mr-2"></i> <span id="likke" class="small">' + mark.likes + '</span> </a>' +
-                                                '</nav>' +
-                                            '</div>' +
-                                            '<hr>' +
-                                            '<p><i class="fas fa-star"></i> ' + mark.score + '</p>';
-                                            if (mark.achievement) {
-                                                html_content += '<p><i class="fas fas fa-trophy"></i> ' + mark.achievement + '</p>';
-                                            }
-                            html_content += '<p class="card-title regular"><a href="check_in.html?id=' + mark._id + '">' + mark.title + '</a></p>' +
-                                            '<p class="card-text text-secondary">' + mark.description + '</p>' +
-                                        '</div>' +
-                                    '</div>' +
-                                '</div>'
-            $("#grid").append(html_content)
-        }
-
-        function like(id, i) {
-            var token = Cookies.get('auth-token');
-            var formData = JSON.stringify({_id: id});
-            $.ajax({
-                url: "http://206.189.54.1/marker/love",
-                type: 'post',
-                headers: {'auth-token': token},
-                contentType: 'application/json',
-                data: formData,
-                success: function(data, textStatus, jqXHR) {
-                    var texter = $("#" + i.toString()).find("#likke")
-                    var likes = parseInt(texter.text());
-                    likes += 1;
-                    texter.text(likes.toString())
-                },
-                error: function(jqXHR) {
-                    console.log(jqXHR);
                 }
             })
         }
