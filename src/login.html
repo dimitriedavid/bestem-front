@@ -114,7 +114,7 @@
                 success: function(data, textStatus, jqXHR) {
                     var token = jqXHR.getResponseHeader('auth-token');
                     console.log(token)
-                    Cookies.set('auth-token', token, { expires: 30}, { secure: true })
+                    Cookies.set('auth-token', token, { expires: 30}, { secure: true }, { sameSite: 'Lax' })
                     window.location = "index.html";
                 },
                 error: function(jqXHR) {
