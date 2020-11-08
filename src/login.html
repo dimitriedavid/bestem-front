@@ -112,9 +112,9 @@
                 contentType: 'application/json',
                 data: formData,
                 success: function(data, textStatus, jqXHR) {
-                    var token = jqXHR.getResponseHeader('auth-token');
-                    console.log(token)
-                    Cookies.set('auth-token', token, { expires: 30}, { secure: true }, { sameSite: 'Lax' })
+                    console.log(data)
+                    var token = data.token;
+                    Cookies.set('auth-token', token, { expires: 30}, { secure: true })
                     window.location = "index.html";
                 },
                 error: function(jqXHR) {
