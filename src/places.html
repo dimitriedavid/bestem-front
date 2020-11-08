@@ -55,6 +55,13 @@
             </div>
         </header>
 
+        <section class="section">
+            <div class="container">
+                <div class="row gap-y" id="grid">
+                </div>
+            </div>
+        </section>
+
         <div id="footer"></div>
         <script src="js/jquery.js"></script>
         <script>$("#footer").load("partials/footer.html")</script>
@@ -97,6 +104,8 @@
     <script src="js/svg.js"></script>
     <script src="js/site.js"></script>
     <script src="js/03.demo.js"></script>
+    <script src="js/js.cookie.min.js"></script>
+    <script src="js/authorization.js"></script>
 
     <script>
         let searchParams = new URLSearchParams(window.location.search);
@@ -124,9 +133,75 @@
                 zoom: 13,
                 center: uluru,
             });
+
+            fetchMap(map);
         };
 
         document.head.appendChild(script);
+
+        function fetchMap(map) {
+            var token = Cookies.get('auth-token');
+            var formData = JSON.stringify({lat: my_lat, long: my_lng, dist: 10000});
+            $.ajax({
+                url: "http://206.189.54.1/marker/getMarkersByDistance",
+                type: 'post',
+                headers: {'auth-token': token},
+                contentType: 'application/json',
+                data: formData,
+                success: function(data, textStatus, jqXHR) {
+                    data.forEach(function(obj, i) {
+                        var mark = obj.marker;
+                        console.log(mark)
+                        console.log(i)
+                        // add marker
+                        var marker = new google.maps.Marker({
+                            position: {lat: mark.coords.lat, lng: mark.coords.long},
+                            map,
+                            title: mark.title
+                        })
+                        marker.addListener("click", () => {
+                            window.location.hash = "";
+                            window.location.hash = i.toString();
+                        });
+
+                        // add mark to grid
+                        addMark(mark, i, obj.username);
+                    })
+                },
+                error: function(jqXHR) {
+                    console.log(jqXHR);
+                    if (jqXHR.responseJSON) {
+                        jqXHR.responseJSON.details.forEach(detail => {
+                            alert(detail.message);
+                        })
+                    } else {
+                        alert(jqXHR.responseText);
+                    }
+                }
+            })
+        }
+
+        function addMark(mark, i, username) {
+            var html_content =  '<div class="col-md-6 col-lg-4" id="' + i + '">' +
+                                    '<div class="card card-blog shadow-box shadow-hover border-0"><a href="blog-post.html"><img class="card-img-top img-responsive" src="https://picsum.photos/350/200/?random&amp;gravity=north" alt=""></a>' +
+                                        '<div class="card-body">' +
+                                            '<div class="d-flex align-items-center justify-content-between">' +
+                                                '<div class="author d-flex align-items-center"><img class="author-picture rounded-circle icon-md shadow-box" src="img/avatar/user.png" alt="...">' +
+                                                    '<p class="small bold my-0">' + username + '</p>' +
+                                                '</div>' +
+                                                '<nav class="nav">' +
+                                                    '<a href="javascript:;" class="d-flex align-items-center text-secondary mr-3 blog-action blog-favorite"><i class="fas fa-heart text-danger mr-2"></i> <span class="small">347</span> </a>' +
+                                                '</nav>' +
+                                            '</div>' +
+                                            '<hr>' +
+                                            '<p><i class="fas fa-star"></i> ' + mark.score + '</p>' +
+                                            '<p class="card-title regular"><a href="blog-post.html">' + mark.title + '</a></p>' +
+                                            '<p class="card-text text-secondary">' + mark.description + '</p>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>'
+            $("#grid").append(html_content)
+        }
     </script>
 </body>
 

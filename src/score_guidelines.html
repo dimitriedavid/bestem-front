@@ -25,15 +25,6 @@
     <link rel="stylesheet" href="css/swiper.css">
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/rtl.css"><!-- endinject -->
-
-    <style>
-        .my_map {
-            height: 400px;
-            width: 100%;
-            max-width: 800px;
-            border-radius: 10px;
-        }
-    </style>
 </head>
 
 <body>
@@ -115,52 +106,6 @@
     <script src="js/svg.js"></script>
     <script src="js/site.js"></script>
     <script src="js/03.demo.js"></script>
-    <script src="js/js.cookie.min.js"></script>
-
-    <script>
-        function updateData(userData) {
-            console.log(userData);
-            $("#username").text(userData.name);
-            $("#email").text(userData.email);
-            $("#email").attr("href", "mailto:" + userData.email);
-            if(userData.role == "Admin") {
-                $("#admin_panel").removeAttr("hidden");
-            }
-        }
-
-        var token = Cookies.get('auth-token');
-        if(!token) {
-            window.location = "login.html";
-        }
-
-        $(document).ready(function() {
-
-            var userData;
-            $.ajax({
-                url: "http://206.189.54.1/user",
-                type: 'get',
-                headers: {'auth-token': token},
-                success: function(data, textStatus, jqXHR) {
-                    updateData(data);
-                },
-                error: function(jqXHR) {
-                    console.log(jqXHR);
-                    if (jqXHR.responseJSON) {
-                        jqXHR.responseJSON.details.forEach(detail => {
-                            alert(detail.message);
-                        })
-                    } else {
-                        alert(jqXHR.responseText);
-                    }
-                }
-            })
-
-            $("#logout").on('click', function(e) {
-                Cookies.remove('auth-token');
-                window.location = 'index.html';
-            });
-        });
-    </script>
 </body>
 
 </html>

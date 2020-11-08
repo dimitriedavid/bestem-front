@@ -144,10 +144,13 @@
     <script src="js/site.js"></script>
     <script src="js/03.demo.js"></script>
     <script src="js/js.cookie.min.js"></script>
+    <script src="js/authorization.js"></script>
 
     <script>
         var selected_lat;
         var selected_lng;
+
+        var marker;
 
         var script = document.createElement('script');
         script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBpOk5SZFZKY2FHopmbi7WKi_cf3rWVRFc&libraries=places&callback=initMap';
@@ -171,7 +174,7 @@
             // Set the data fields to return when the user selects a place.
             autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
 
-            const marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
                 map,
                 draggable: true,
                 anchorPoint: new google.maps.Point(0, -29),
@@ -198,6 +201,8 @@
                 selected_lat = place.geometry.location.lat();
                 selected_lng = place.geometry.location.lng();
 
+                console.log()
+
                 $("#location-error").attr("hidden", true);
             });
         };
@@ -216,8 +221,8 @@
             }
 
             var title = $("#title").val();
-            var lat = selected_lat;
-            var long = selected_lng;
+            var lat = marker.getPosition().lat();
+            var long = marker.getPosition().lng();
             var score = $("#score").val();
             var description = $("#description").val();
             var secret_info = $("#secret_info").val();
