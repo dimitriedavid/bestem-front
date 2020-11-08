@@ -118,7 +118,7 @@
             var token = Cookies.get('auth-token');
             var formData = JSON.stringify({lat: my_lat, long: my_lng, dist: 10000});
             $.ajax({
-                url: "http://206.189.54.1/marker/getLeaderboardByDist",
+                url: "https://api.explorescu.co.ro/marker/getLeaderboardByDist",
                 type: 'post',
                 headers: {'auth-token': token},
                 contentType: 'application/json',

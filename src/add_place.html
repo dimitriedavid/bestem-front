@@ -58,7 +58,7 @@
         </header>
         <section>
             <div class="container py-5">
-                <form id="add_place_form" action="http://206.189.54.1/marker/add" method="post">
+                <form id="add_place_form" action="https://api.explorescu.co.ro/marker/add" method="post">
                     <h3>Title</h3>
                     <div class="form-group mb-5" style="max-width: 300px;">
                         <input type="text" id="title" name="title" class="form-control form-control-rounded" placeholder="Title" required>
@@ -242,7 +242,7 @@
             var formData = JSON.stringify({title, lat, long, score, description, secret_info, photo, achievement});
             var token = Cookies.get('auth-token');
             $.ajax({
-                url: "http://206.189.54.1/marker/add",
+                url: "https://api.explorescu.co.ro/marker/add",
                 type: 'post',
                 contentType: 'application/json',
                 data: formData,

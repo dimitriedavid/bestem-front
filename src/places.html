@@ -150,7 +150,7 @@
             var token = Cookies.get('auth-token');
             var formData = JSON.stringify({lat: my_lat, long: my_lng, dist: 10000});
             $.ajax({
-                url: "http://206.189.54.1/marker/getMarkersByDistance",
+                url: "https://api.explorescu.co.ro/marker/getMarkersByDistance",
                 type: 'post',
                 headers: {'auth-token': token},
                 contentType: 'application/json',
@@ -217,7 +217,7 @@
             var token = Cookies.get('auth-token');
             var formData = JSON.stringify({_id: id});
             $.ajax({
-                url: "http://206.189.54.1/marker/love",
+                url: "https://api.explorescu.co.ro/marker/love",
                 type: 'post',
                 headers: {'auth-token': token},
                 contentType: 'application/json',
