@@ -46,7 +46,10 @@
 
         <section class="section">
             <div class="container">
-                <div class="row gap-y" id="grid">
+                <div class="row gap-y">
+                    <div class="col-lg-6" id="grid">
+
+                    </div>
                 </div>
             </div>
         </section>
@@ -121,7 +124,20 @@
                 contentType: 'application/json',
                 data: formData,
                 success: function(data, textStatus, jqXHR) {
-                    console.log(data)
+                    var me = data["__Me__"]
+                    delete data.__Me__
+                    var arr = Object.entries(data)
+                    arr.sort((a, b) => (a[1] < b[1]) ? 1 : -1)
+                    var i = 1
+                    arr.forEach(val => {
+                        if (val[0] == me) {
+                            $("#grid").append('<h2 class="text-success">' + i + '. <strong>' + val[0] + ' : ' + val[1] + '</strong></h2><br/>')
+                        } else {
+                            $("#grid").append('<h2>' + i + '. <strong>' + val[0] + ' : ' + val[1] + '</strong></h2><br/>')
+                        }
+
+                        i+=1
+                    })
                 },
                 error: function(jqXHR) {
                     console.log(jqXHR);
